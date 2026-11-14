@@ -44,5 +44,5 @@ wait_for_log "$out_dir/sorter.log" '用意しました' 180
 wait_for_log "$out_dir/sorter.log" '依頼を待っています' 180
 
 # RViz は crane_plus の launch が必ず起動するが、試験には不要なため終了する
-pkill -f '[r]viz2' || true
+pkill -f 'lib/rviz2/[r]viz2' || true
 echo ready

@@ -12,7 +12,7 @@
 #   sim.log、sorter.log、watch.log  各処理のログ
 
 set -u
-# watch_object_frames.py を SIGINT で停止できるよう、ジョブ制御を有効にする
+# バックグラウンドの watch_object_frames.py を SIGINT で停止できるよう、ジョブ制御を有効にする
 set -m
 
 here=$(cd "$(dirname "$0")" && pwd)
@@ -43,16 +43,17 @@ for seed in "$@"; do
     while read -r position; do
         cylinder_args+=(--cylinder "$position")
     done < <(grep -a 'distractor_' "$out_dir/sim.log" | sed -E 's/.*x=([-0-9.]+) y=([-0-9.]+).*/\1,\2/')
-    setsid python3 "$here/watch_object_frames.py" "$out_dir/tf.json" "${cylinder_args[@]}" \
+    python3 "$here/watch_object_frames.py" "$out_dir/tf.json" "${cylinder_args[@]}" \
         > "$out_dir/watch.log" 2>&1 < /dev/null &
+    watcher=$!
     sleep 5
 
     start=$(date +%s)
     timeout 600 ros2 run crane_sorter send_instruction "${instructions[@]}" > "$out_dir/run.log" 2>&1
     echo "elapsed $(( $(date +%s) - start ))" >> "$out_dir/run.log"
     sleep 4
-    pkill -INT -f '[w]atch_object_frames.py'
-    sleep 2
+    kill -INT "$watcher"
+    wait "$watcher"
 
     python3 "$here/judge_positions.py" "$out_dir/sim.log" "$expected" > "$out_dir/judge.txt" 2>&1
     bash "$here/stop_stack.sh" > /dev/null
