@@ -253,6 +253,13 @@ Claude の作業は 10/29 の分まで終わり、提出者の確認が残って
 | 提出用のリポジトリ | https://github.com/anonymus-acc/ros2-trial 。動画の最後の画面とレポートに出す URL もこれにする（issue #21） |
 | コミットの作成者名 | `siruku6` から `sirukufarios` に変える。メールアドレスも `sirukufarios@users.noreply.github.com` に変える。siruku6 の noreply アドレスは ID から siruku6 を辿れるため。全履歴の作成者を書き換え、元のリポジトリと提出用のリポジトリの両方に push する（issue #22） |
 
+2026-11-14 に、提出者が次を決めました。
+
+| 項目 | 決めたこと |
+|---|---|
+| 最終版レポート | `docs/report/` に収録する（issue #26） |
+| 処理の置き場所 | `src/` になじまない試験用の処理は `experiments/` に置く。`tools/` は汎用ツールのみとする（issue #28） |
+
 git の作者の設定はクローンごとに要るので、GPU マシンでクローンしたら次を実行します。
 
 ```bash
