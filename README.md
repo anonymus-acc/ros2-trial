@@ -266,5 +266,7 @@ AI 版の物体を探すノード（`object_detector`）だけを、この仮想
 | `src/crane_sorter/test/` | 単体テスト。`python3 -m pytest src/crane_sorter/test` で実行する |
 | `tools/detector_comparison/` | 検出モデルを比べるための、画像を集めるスクリプトと比べるスクリプト |
 | `tools/video/` | 提出用の動画を撮る `record_demo.sh` と、字幕を付けて 1 本にまとめる `edit_video.py`。動画に出す文字と再生の速さは `video_text.yaml`。使い方は各ファイルの先頭にある |
+| `tools/report/` | レポートの図の作成処理。検出結果画像を保存する `save_detections.py` と、録画と検出結果画像から図を作成する `make_figures.sh`。使用方法は各ファイルの先頭に記載 |
 | `docs/plans/` | 作業の計画 |
 | `docs/design/` | 仕組みの説明 |
+| `docs/report/` | 最終課題のレポート（`261031_final_report.md`）と図 |
